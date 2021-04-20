@@ -1,0 +1,64 @@
+<div class='sixteen wide column event card event--<%= event.open_class %>'
+     style='--bg-image: url(<%= url_for(event.banner) if event.banner.present? %>)'>
+
+  <%= link_to(event, class: 'content') do %>
+    <h3 class='header'><%= event.name %></h3>
+
+    <p class='meta'><%= event.location %></p>
+
+    <div class='description ui stackable grid'>
+      <div class='eight wide column'>
+        <p>Nearest Aetherite/Aethernet: <%= event.nearest_aetherite %></p>
+
+        <p data-controller='time-conversions'
+           data-time-conversions-start-time-value='<%= event.start_time.iso8601 %>'
+           data-time-conversions-end-time-value='<%= event.end_time.iso8601 %>'
+           data-time-conversions-time-format-value='t'>
+
+          <span data-time-conversions-target='time'></span>
+          <br/>
+          <small><%= event.schedule %></small>
+        </p>
+      </div>
+
+      <div class='eight wide column event--description'>
+        <%= markdown event.description %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class='flag'><%= event.open_class.titleize %></div>
+
+  <div class='extra content'>
+    <div class='right floated ui action buttons'>
+      <%= link_to(event_path(event),
+                  class: 'ui basic inverted icon button',
+                  remote: true,
+                  method: :delete,
+                  title: 'Delete Event',
+                  data: { confirm: 'Are you sure you want to delete this event?'}) do %>
+        <i class='trash icon'></i>
+      <% end %>
+
+
+      <%= link_to(edit_event_path(event),
+                  class: 'ui basic inverted icon button',
+                  title: 'Edit Event') do %>
+        <i class='edit icon'></i>
+      <% end %>
+
+      <a class='ui basic inverted icon button' title='Favorite Event'>
+        <i class='heart outline icon'></i>
+      </a>
+    </div>
+
+    <small>
+      Last Updated:
+      <span data-controller='time-conversions'
+            data-time-conversions-target='time'
+            data-time-conversions-time-value='<%= event.updated_at.iso8601 %>'
+            data-time-conversions-time-format-value='DATETIME_SHORT'>
+      </span>
+    </small>
+  </div>
+</div>

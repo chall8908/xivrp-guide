@@ -114,6 +114,12 @@ module Ffxiv
       }
     }.freeze
 
+    @@data_centers = {
+      'North America' => %w{ Aether Primal Crystal },
+      'Japan' => %w{ Elemental Gaia Mana },
+      'Europe' => %w{ Chaos Light },
+    }
+
     @@servers = {
       "Elemental" => %w{Aegis Atomos Carbuncle Garuda Gungnir Kujata Ramuh
                         Tonberry Typhon Unicorn},
@@ -124,13 +130,18 @@ module Ffxiv
       "Mana" => %w{Anima Asura Belias Chocobo Hades Ixion Mandragora Masamune
                    Pandaemonium Shinryu Titan},
 
-      "Aether" => %w{Adamantoise Balmung Cactuar Coeurl Faerie Gilgamesh Goblin
-                     Jenova Mateus Midgardsormr Sargatanas Siren Zalera},
+      "Aether" => %w{Adamantoise Cactuar Faerie Gilgamesh Jenova Midgardsormr
+                     Sargatanas Siren},
 
-      "Primal" => %w{Behemoth Brynhildr Diabolos Excalibur Exodus Famfrit Hyperion
-                     Lamia Leviathan Malboro Ultros},
+      "Primal" => %w{Behemoth Excalibur Exodus Famfrit Hyperion Lamia Leviathan
+                     Ultros},
 
-      "Chaos" => %w{Cerberus Lich Moogle Odin Phoenix Ragnarok Shiva Zodiark},
+      "Crystal" => %w{Balmung Brynhildr Coeurl Diabolos Goblin Malboro Mateus
+                      Zalera},
+
+      "Chaos" => %w{Cerberus Louisoix Moogle Omega Ragnarok Spriggan},
+
+      "Light" => %w{Lich Odin Phoenix Shiva Twintania Zodiark},
     }.freeze
 
     class << self

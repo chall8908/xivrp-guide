@@ -6,11 +6,39 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%#= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <header class='ui grey inverted menu'>
+      <nav class='ui container'>
+        <a href="/" class='ui fitted borderless header logo item'>XIVRP Guide</a>
+
+        <div class='right menu'>
+          <div class='ui item button'>
+            <i class='user icon'></i> Log In
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <% [:error, :alert, :notice, :success].each do |level| %>
+      <% if flash[level] %>
+        <%# convert flash level into an appropriate alert class variation %>
+        <% variation = variation_for_flash level %>
+
+        <div class='ui compact floating <%= variation %> system message'
+             data-controller='message'
+             data-message-autodismiss-value='10000'>
+          <i class='close icon' data-action='click->message#closeMessage'></i>
+          <%= flash[level] %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <main class='ui container'>
+      <%= yield %>
+    </main>
   </body>
 </html>

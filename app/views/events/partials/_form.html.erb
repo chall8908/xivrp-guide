@@ -1,0 +1,138 @@
+<%= form_with(model: event, class: 'ui event form', data: { controller: 'event-form' }) do |f| %>
+
+  <div class='required field'>
+    <%= f.label :name do %>
+      Name <small>Used to build the event slug.  The generated slug must be unique.</small>
+    <% end %>
+    <%= f.text_field :name, maxlength: 120, required: true, data: { event_form_target: 'name', action: 'keyup->event-form#updateSlug'} %>
+    <small>Max 120 characters.  Generated slug: <span data-event-form-target='slug'></span></small>
+  </div>
+
+  <div class='required field'>
+    <%= f.label :description do %>
+      Description <small>Some markdown supported.</small>
+    <% end %>
+    <%= f.text_area :description, maxlength: 240, rows: 5, required: true %>
+  </div>
+
+  <div class='fields'>
+    <div class='required eight wide field'>
+      <%= f.label :server %>
+      <%= f.select :server, server_options, { include_blank: true }, required: true, data: { event_form_target: 'server' } %>
+    </div>
+
+    <div class='required eight wide field'>
+      <%= f.label :location %>
+      <%= f.text_field :location, required: true %>
+    </div>
+  </div>
+
+  <div class='fields'>
+    <div class='required eight wide field'>
+      <%= f.label :nearest_aetherite, 'Nearest Aetherite/Aethernet Node' %>
+      <%= f.text_field :nearest_aetherite, required: true %>
+    </div>
+
+    <div class='four wide field'>
+      <%= f.label :ward do %>
+        Ward <small>(1-24)</small>
+      <% end %>
+      <%= f.number_field :ward, min: 1, max: 24, step: 1 %>
+    </div>
+
+    <div class='four wide field'>
+      <%= f.label :plot do %>
+        Plot <small>(1-60)</small>
+      <% end %>
+      <%= f.number_field :plot, min: 1, max: 60, step: 1 %>
+    </div>
+  </div>
+
+  <hr class='ui divider' />
+
+  <h3>Schedule</h3>
+
+  <p>
+    This schedule will repeate every week until the given end date.
+    If you want an event to only occur once, set the end date to the same day as
+    the start date.
+  </p>
+
+  <div class='fields'>
+    <div class='required four wide field'>
+      <%= label :event, :start_date do %>
+        Start Date <small>First date this schedule is active.</small>
+      <% end %>
+      <%= f.date_field :start_date, required: true %>
+    </div>
+
+    <div class='required four wide field'>
+      <%= label :event, :start_time, 'Start Time' %>
+      <%= f.time_field :start_time, required: true %>
+    </div>
+
+    <div class='required four wide field'>
+      <%= label :event, :end_time, 'End Time' %>
+      <%= f.time_field :end_time, required: true %>
+    </div>
+
+    <div class='four wide field'>
+      <%= label :event, :end_date do %>
+        End Date <small>Last date this schedule is active.</small>
+      <% end %>
+      <%= f.date_field :end_date %>
+      <small>Leave blank for a perpetual event.</small>
+    </div>
+  </div>
+
+  <div class='fields'>
+    <div class='required eight wide field' data-event-form-target='days'>
+      <label>Active Days</label>
+
+      <div class='ui buttons event--days'>
+        <label class='ui compact button'>
+          S <%= f.check_box :sunday, data: { action: 'change->event-form#updateDayButton'} %>
+        </label>
+        <label class='ui compact button'>
+          M <%= f.check_box :monday, data: { action: 'change->event-form#updateDayButton'} %>
+        </label>
+        <label class='ui compact button'>
+          T <%= f.check_box :tuesday, data: { action: 'change->event-form#updateDayButton'} %>
+        </label>
+        <label class='ui compact button'>
+          W <%= f.check_box :wednesday, data: { action: 'change->event-form#updateDayButton'} %>
+        </label>
+        <label class='ui compact button'>
+          Th <%= f.check_box :thursday, data: { action: 'change->event-form#updateDayButton'} %>
+        </label>
+        <label class='ui compact button'>
+          F <%= f.check_box :friday, data: { action: 'change->event-form#updateDayButton'} %>
+        </label>
+        <label class='ui compact button'>
+          Sa <%= f.check_box :saturday, data: { action: 'change->event-form#updateDayButton'} %>
+        </label>
+      </div>
+    </div>
+
+    <div class='required eight wide field'>
+      <%= f.label :timezone %>
+      <%= f.time_zone_select :timezone, nil, { model: TZInfo::Timezone }, required: true, data: { event_form_target: 'timezone' } %>
+      <small>This should be set automatically.  If not, please select the nearest city in the same timezone as you.</small>
+    </div>
+  </div>
+
+  <% unless event.banner.present? %>
+    <div class='required field'>
+      <%= f.label :banner %>
+      <%= f.file_field :banner, required: event.banner.nil?, accept: 'image/*', data: { event_form_target: 'file', action: 'change->event-form#updateCardBackground' } %>
+    </div>
+
+    <h3>Background Preview</h3>
+
+    <div class='ui inverted cards grid' data-event-form-target='cards'>
+      <%= render partial: 'event', locals: { event: EventViews::ShowView.new(dummy_event) } %>
+    </div>
+  <% end %>
+
+  <%= f.submit(class: 'ui button primary') %>
+<% end %>

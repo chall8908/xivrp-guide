@@ -3,15 +3,18 @@ class Schedule < ApplicationRecord
 
   def to_recurrent
     repeat = case repeat_unit
-            when 'never'
-              repeat_interval.weeks
-            else
-              repeat_interval.send(repeat_unit)
+             when 'never'
+               1.week
+             else
+               repeat_interval.send(repeat_unit)
              end
 
-    start_time, _ = times.split('-')
-
-    Montrose.r(every: repeat, on: days, starts: start_date, until: end_date, at: start_time, between: times)
+    Montrose.r(every: repeat,
+               on: days,
+               starts: start_date,
+               until: end_date,
+               at: start_time.strftime('%r'),
+               during: start_time..end_time)
   end
 
   private

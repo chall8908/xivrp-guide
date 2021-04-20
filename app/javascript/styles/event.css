@@ -1,0 +1,126 @@
+.event.card {
+  font-size: 1.3em !important;
+
+  background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+              var(--bg-image) no-repeat center/cover !important;
+
+  text-shadow:
+   -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
+}
+
+.event.card .header,
+.event.card .description,
+.event.card .extra.content {
+  color: white !important;
+}
+
+.event.card .flag {
+  position: absolute;
+  top: 15px;
+  right: -5px;
+
+  height: 38px;
+  padding: .5em 1em;
+
+  text-shadow: none;
+
+  color: white;
+}
+
+.event.card .flag:before {
+  position: absolute;
+
+  top: 0;
+  left: -19px;
+
+  content: ' ';
+
+  border-left: 19px solid transparent;
+  border-top: 19px solid;
+  border-bottom: 19px solid;
+}
+
+.event.card .flag:after {
+  position: absolute;
+
+  content: ' ';
+
+  bottom: -5px;
+  right: 0;
+
+  border-top: 5px solid;
+  border-right: 5px solid transparent;
+}
+
+.event.card.event--open-soon .flag {
+  background-color: #f2711c;
+}
+
+.event.card.event--open-soon .flag:before {
+  border-top-color: #f2711c;
+  border-bottom-color: #f2711c;
+}
+
+.event.card.event--open-soon .flag:after {
+  border-top-color: hsl(24deg 99% 35%);
+}
+
+.event.card.event--open-now .flag {
+  background-color: #21ba45;
+}
+
+.event.card.event--open-now .flag:before {
+  border-top-color: #21ba45;
+  border-bottom-color: #21ba45;
+}
+
+.event.card.event--open-now .flag:after {
+  border-top-color: hsl(134deg 80% 33%);
+}
+
+.event.card.event--closed .flag {
+  background-color: #db2828;
+}
+
+.event.card.event--closed .flag:before {
+  border-top-color: #db2828;
+  border-bottom-color: #db2828;
+}
+
+.event.card.event--closed .flag:after {
+  border-top-color: hsl(0deg 85% 31%);
+}
+
+.event.card .event--description {
+  max-height: 150px;
+
+  overflow: hidden;
+}
+
+.event.card .action.buttons .button {
+  box-shadow: none;
+}
+
+.event.card .action.buttons .button:hover {
+  box-shadow: 0 0 0 2px white inset;
+}
+
+.event.form .event--days input[type='checkbox'] {
+  width: 0px;
+  visibility: hidden;
+}
+
+@media (max-width: 768px) {
+  .event.card .event--description {
+    display: none !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .event.form .event--days .button {
+    padding: .58928571em .75em .58928571em;
+  }
+}

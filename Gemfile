@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.0'
+ruby '2.7.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.1'
@@ -24,8 +24,15 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
-gem 'activeadmin', '~> 2.9.0'
-gem 'montrose', '~> 0.12.0'
+# gem 'activeadmin', '~> 2.9.0'
+# gem 'montrose', '~> 0.12.0'
+gem 'ice_cube', '~> 0.16.3'
+
+gem 'aws-sdk-s3', '~> 1.93.1'
+
+gem "devise", "~> 4.7"
+gem "omniauth-discord", "~> 1.0"
+gem 'cancancan', '~> 3.2.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -48,3 +55,7 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem "mini_magick", "~> 4.11"
+
+gem "redcarpet", "~> 3.5"

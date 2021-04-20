@@ -10,7 +10,9 @@ module Ffxiv
     class << self
       # This provides a new URI object each time to prevent individual uses from
       # interacting with each other.
-      def lodestone = URI('https://na.finalfantasyxiv.com/lodestone/')
+      def lodestone
+        URI('https://na.finalfantasyxiv.com/lodestone/')
+      end
 
       def fetch(endpoint, **query_hash)
         uri = lodestone
