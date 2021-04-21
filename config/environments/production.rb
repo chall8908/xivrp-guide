@@ -53,6 +53,8 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { protocol: 'https', host: 'xivrp.guide' }
 
+  config.action_mailer.default_options = { from: 'no-reply@xivrp.guide' }
+
   config.action_mailer.smtp_settings = {
     address:             credentials.dig(:smtp, :host),
     port:                587,
