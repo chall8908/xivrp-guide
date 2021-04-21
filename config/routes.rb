@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   root to: 'events#index'
 
+  get :about, to: 'static#about'
+
   resources :events, param: :slug
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }

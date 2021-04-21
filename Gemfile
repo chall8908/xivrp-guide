@@ -68,3 +68,5 @@ gem "redcarpet", "~> 3.5"
 gem "sidekiq", "~> 6.2"
 
 gem "sidekiq-cron", "~> 1.2"
+
+gem "actionview-encoded_mail_to", "~> 1.0"

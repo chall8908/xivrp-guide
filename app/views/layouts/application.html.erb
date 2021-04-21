@@ -29,7 +29,7 @@
       <% end %>
     <% end %>
 
-    <main class='ui container'>
+    <main class='ui <%= 'text' if @compact_view %> container'>
       <div class='ui visible message'>
         <h4 class='header'>Hey there!</h4>
 
@@ -39,6 +39,12 @@
           and the rest of the Final Fantasy 14 RP community.
         </p>
 
+        <% unless current_page?(about_path) %>
+          <p>
+            Head over to the <%= link_to 'About', about_path %> page to learn
+            how to send us feedback!
+          </p>
+        <% end %>
       </div>
 
       <%= yield %>
