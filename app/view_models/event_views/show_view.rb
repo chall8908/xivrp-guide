@@ -2,8 +2,10 @@ module EventViews
   class ShowView
     include ::RouteViewModelAsModel
     include Forwardable
+    extend CanCanCan::Masquerade::InheritPermissions
 
     route_as :event
+    inherit_permissions_from :record
 
     attr_reader :schedule, :location, :banner_url, :start_time, :end_time
 

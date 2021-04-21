@@ -1,0 +1,58 @@
+<% content_for :head do %>
+  <%= javascript_pack_tag 'login', 'data-turbolinks-track': 'reload' %>
+<% end %>
+
+<div class='ui segment'>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'ui form', data: { controller: 'registration', action: 'registration#ensureValidity' } }) do |f| %>
+    <div style='float: right'>
+      Already have an account?
+      <%= link_to 'Log In', new_session_path(resource_name), class: 'ui tertiary button' %>
+    </div>
+    <h2>Sign up</h2>
+
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="required field">
+      <%= f.label :email %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
+    </div>
+
+    <div class="required field" data-controller='password'>
+      <%= f.label :password do %>
+        Password
+
+        <small>
+          <% if @minimum_password_length %>
+            (<%= @minimum_password_length %> characters minimum)
+          <% end %>
+
+          <span class='ui grey text' style='float: right'>
+            Uses <a href="https://github.com/dropbox/zxcvbn" target='_blank'>zxcvbn</a> for password strength
+          </span>
+        </small>
+      <% end %>
+      <%= f.password_field(:password,
+                           autocomplete: "new-password",
+                           minlength: @minimum_password_length,
+                           required: true,
+                           data: { action: 'keyup->password#calculateStrength', registration_target: 'password' }) %>
+
+      <div class='ui tiny password progress' data-password-target='progress'>
+        <div class='bar' data-password-target='bar'></div>
+        <div class='label' data-password-target='label'></div>
+      </div>
+    </div>
+
+    <div class="required field">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field(:password_confirmation,
+                           autocomplete: "new-password",
+                           required: true,
+                           data: { registration_target: 'passwordConfirmation' }) %>
+    </div>
+
+    <div class="field">
+      <%= f.submit "Sign up", class: 'ui primary button' %>
+    </div>
+  <% end %>
+</div>

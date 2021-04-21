@@ -1,0 +1,20 @@
+.ui.discord.button {
+  background-color: #7289DA;
+  color: #fff;
+}
+
+.ui.discord.button .large.discord.icon {
+  padding: .392857145em 0;
+}
+
+.ui.password.progress {
+  margin-top: 0px;
+}
+
+.ui.password.progress .bar {
+  font-size: .4em;
+}
+
+.ui.password.progress .label {
+  text-align: left;
+}

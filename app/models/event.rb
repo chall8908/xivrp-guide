@@ -1,6 +1,8 @@
 class Event < ApplicationRecord
   def to_param; slug; end
 
+  belongs_to :user
+
   has_many :occurrences, dependent: :delete_all
 
   has_one_attached :banner

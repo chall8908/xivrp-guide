@@ -1,27 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Xivrp</title>
+    <title>XIVRP Guide</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%#= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <%= yield :head %>
   </head>
 
   <body>
-    <header class='ui grey inverted menu'>
-      <nav class='ui container'>
-        <a href="/" class='ui fitted borderless header logo item'>XIVRP Guide</a>
-
-        <div class='right menu'>
-          <div class='ui item button'>
-            <i class='user icon'></i> Log In
-          </div>
-        </div>
-      </nav>
-    </header>
+    <%= render partial: 'navbar' %>
 
     <% [:error, :alert, :notice, :success].each do |level| %>
       <% if flash[level] %>

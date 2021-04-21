@@ -31,25 +31,28 @@
 
   <div class='extra content'>
     <div class='right floated ui action buttons'>
-      <%= link_to(event_path(event),
-                  class: 'ui basic inverted icon button',
-                  remote: true,
-                  method: :delete,
-                  title: 'Delete Event',
-                  data: { confirm: 'Are you sure you want to delete this event?'}) do %>
-        <i class='trash icon'></i>
+      <% if can? :destroy, event %>
+        <%= link_to(event_path(event),
+                    class: 'ui basic inverted icon button',
+                    method: :delete,
+                    title: 'Delete Event',
+                    data: { confirm: 'Are you sure you want to delete this event?'}) do %>
+          <i class='trash icon'></i>
+        <% end %>
       <% end %>
 
-
-      <%= link_to(edit_event_path(event),
-                  class: 'ui basic inverted icon button',
-                  title: 'Edit Event') do %>
-        <i class='edit icon'></i>
+      <% if can? :edit, event %>
+        <%= link_to(edit_event_path(event),
+                    class: 'ui basic inverted icon button',
+                    title: 'Edit Event') do %>
+          <i class='edit icon'></i>
+        <% end %>
       <% end %>
 
-      <a class='ui basic inverted icon button' title='Favorite Event'>
-        <i class='heart outline icon'></i>
-      </a>
+      <%# TODO: Add favorites system -%>
+      <!-- <a class='ui basic inverted icon button' title='Favorite Event'>
+           <i class='heart outline icon'></i>
+           </a> -->
     </div>
 
     <small>

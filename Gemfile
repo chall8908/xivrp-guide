@@ -30,9 +30,14 @@ gem 'ice_cube', '~> 0.16.3'
 
 gem 'aws-sdk-s3', '~> 1.93.1'
 
-gem "devise", "~> 4.7"
+# Authentication
+gem "omniauth", "< 2"
 gem "omniauth-discord", "~> 1.0"
+gem "devise", "~> 4.7"
+
+# Authorization
 gem 'cancancan', '~> 3.2.1'
+gem 'cancancan_masquerade', '~> 0.1.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

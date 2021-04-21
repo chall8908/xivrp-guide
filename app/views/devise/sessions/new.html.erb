@@ -1,0 +1,46 @@
+<div class='ui two column stackable center aligned grid segment'>
+
+  <div class='ui vertical divider'>Or</div>
+
+  <div class='middle aligned row'>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'ui left aligned column form' }) do |f| %>
+      <div style='float: right'>
+        No account? <%= link_to 'Sign Up', new_registration_path(resource_name), class: 'ui tertiary button' %>
+      </div>
+
+      <h2>Sign in</h2>
+
+      <div class="field">
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password do %>
+          Password
+          <small><%= link_to "Forgot your password?", new_password_path(resource_name) %></small>
+        <% end %>
+        <%= f.password_field :password, autocomplete: "current-password" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <label>
+            <%= f.check_box :remember_me %> Remember me
+          </label>
+        </div>
+      <% end %>
+
+      <div class="ui field">
+        <%= f.submit "Log in", class: 'ui primary button' %>
+      </div>
+    <% end %>
+
+    <div class='center aligned column'>
+      <%= link_to user_discord_omniauth_authorize_path, method: :post, class: 'ui huge discord labeled icon button' do %>
+        <i class="large discord icon"></i> Sign in with Discord
+        <% end %>
+    </div>
+  </div>
+</div>

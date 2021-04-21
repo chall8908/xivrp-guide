@@ -10281,6 +10281,7 @@ fsevents@~2.3.1:
     tom-select: ^1.4.3
     turbolinks: ^5.2.0
     webpack-dev-server: ^3.11.2
+    zxcvbn: ^4.4.2
   languageName: unknown
   linkType: soft
 
@@ -10358,5 +10359,12 @@ fsevents@~2.3.1:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: 096c3b40beb2804659539be1605a35c58eb0c85285f94b77b3e924f42ee265c1a40bf9f4153770039517146b469a964d51742395f35ca8135fc9f7e4982b785d
+  languageName: node
+  linkType: hard
+
+"zxcvbn@npm:^4.4.2":
+  version: 4.4.2
+  resolution: "zxcvbn@npm:4.4.2"
+  checksum: 007bc474780b85e065faa60dff5ff934665dd5efbedf317bf2c42b63d527fcba641879cde1f3c040ceb147a59ba489aa267c64206857fe923032cab5b54e6117
   languageName: node
   linkType: hard

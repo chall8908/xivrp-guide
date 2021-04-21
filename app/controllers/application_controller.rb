@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :set_current_user
 
   # Bit of convenience for partials.  Adds an additional, less efficient resolver
   # That will look for partials in a subfolder named "partials".  This could be
@@ -9,5 +10,13 @@ class ApplicationController < ActionController::Base
       resolver.instance_variable_set('@pattern', ActionView::PathResolver::DEFAULT_PATTERN.sub(':prefix', ':prefix{/partials,}'))
     end
   )
+
+  def set_current_user
+    Current.user = current_user
+  end
+
+  def current_ability
+    Current.ability || Ability.new
+  end
 
 end

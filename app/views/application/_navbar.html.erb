@@ -1,0 +1,13 @@
+<header class='ui grey inverted menu'>
+  <nav class='ui container'>
+    <a href="/" class='ui fitted borderless header logo item'>XIVRP Guide</a>
+
+    <% if can? :create, Event %>
+      <%= link_to 'Create Event', new_event_path, class: 'item' %>
+    <% end %>
+
+    <div class='right menu'>
+      <%= render partial: 'user' %>
+    </div>
+  </nav>
+</header>

@@ -1,3 +1,21 @@
-<div class='ui inverted cards grid'>
-  <%= render @events %>
-</div>
+<% if @events.any? %>
+  <div class='ui inverted cards grid'>
+    <%= render @events %>
+  </div>
+<% else %>
+  <div class='ui placeholder segment'>
+    <h2 class='ui icon header'>
+      <i class="calendar outline icon"></i>
+      No events found!
+    </h2>
+
+
+    <% if user_signed_in? %>
+      <%= link_to 'Create One Now!', new_event_path, class: 'ui large primary button' %>
+    <% else %>
+      <div class='inline'>
+        <%= link_to 'Log in', new_user_session_path, class: 'ui primary button' %> to make one!
+      </div>
+    <% end %>
+  </div>
+<% end %>

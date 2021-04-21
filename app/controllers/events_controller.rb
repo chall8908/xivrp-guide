@@ -1,11 +1,18 @@
 class EventsController < ApplicationController
+  load_and_authorize_resource only: %i[ new create ]
 
   def index
+    authorize! :read, Event
+
     @events = EventViews::IndexView.new(Event.active)
   end
 
   def show
-    @event = EventViews::ShowView.new(Event.find_by(slug: params[:slug]))
+    event = Event.find_by(slug: params[:slug])
+
+    authorize! :read, event
+
+    @event = EventViews::ShowView.new(event)
 
   rescue ActiveRecord::RecordNotFound
     flash[:error] = "Unable to find an event with the slug: #{params[:slug]}"
@@ -13,25 +20,20 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = Event.new(schedule: IceCube::Schedule.new(Date.today).to_yaml)
-  end
+    # @event is loaded by load_resource
 
-  def edit
-    @event = Event.find_by(slug: params[:slug])
-
-  rescue ActiveRecord::RecordNotFound
-    flash[:error] = "Unable to find an event with the slug: #{params[:slug]}"
-    redirect_to :back
+    # Small dummy schedule to make the form a little nicer
+    @event.schedule = IceCube::Schedule.new(Date.today).to_yaml
   end
 
   def create
-    @event = Event.new(create_params)
+    # @event is loaded by load_resource
 
     @event.schedule_rules = build_schedule
 
     @event.save!
 
-    flash[:success] = "Event created successfully"
+    flash[:success] = "Successfully created #{@event.name}"
 
     redirect_to @event
   rescue => e
@@ -41,15 +43,27 @@ class EventsController < ApplicationController
     render 'new'
   end
 
+  def edit
+    @event = Event.find_by(slug: params[:slug])
+
+    authorize! :edit, @event
+
+  rescue ActiveRecord::RecordNotFound
+    flash[:error] = "Unable to find an event with the slug: #{params[:slug]}"
+    redirect_to :back
+  end
+
   def update
     @event = Event.find_by(slug: params[:slug])
+
+    authorize :update, @event
 
     @event.assign_attributes(create_params)
     @event.schedule_rules = build_schedule
 
     @event.save!
 
-    flash[:success] = "Event updated successfully"
+    flash[:success] = "Successfully updated #{@event.name}"
 
     redirect_to @event
 
@@ -60,23 +74,26 @@ class EventsController < ApplicationController
     render 'edit'
   end
 
-  def delete
+  def destroy
     @event = Event.find_by(slug: params[:slug])
+
+    authorize! :destroy, @event
 
     @event.destroy
 
-    redirect_to 'root'
+    flash[:success] = "Deleted #{event.name}"
+
+    respond_to do |f|
+      f.html do
+        redirect_to 'root'
+      end
+    end
 
   rescue ActiveRecord::RecordNotFound
     respond_to do |f|
       f.html do
         flash[:error] = "Unable to find an event with the slug: #{params[:slug]}"
         redirect_to :back
-      end
-
-      f.js do
-        render json: { error: "Unable to find an event with the slug: #{params[:slug]}" },
-               status: :unprocessable_entity
       end
     end
   end
