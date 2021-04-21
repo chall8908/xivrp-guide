@@ -4,15 +4,21 @@
 # the maximum value specified for Puma. Default is set to 5 threads for minimum
 # and maximum; this matches the default thread size of Active Record.
 #
+tag 'xivrp-guide'
+
 max_threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
 min_threads_count = ENV.fetch("RAILS_MIN_THREADS") { max_threads_count }
 threads min_threads_count, max_threads_count
 
 bind 'unix:///run/xivrp/puma.sock'
+pidfile '/run/xivrp/puma.pid'
+state_path '/run/xivrp/puma.state'
 
 # Specifies the `environment` that Puma will run in.
 #
 environment ENV.fetch("RAILS_ENV") { "development" }
+
+drain_on_shutdown
 
 workers 2
 
