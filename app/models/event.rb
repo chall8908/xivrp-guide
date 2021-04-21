@@ -15,7 +15,7 @@ class Event < ApplicationRecord
   validates_presence_of(:slug, :name, :description, :server, :location, :timezone,
                         :nearest_aetherite, :schedule)
 
-  before_save :update_occurrences, if: :schedule_changed?
+  before_save :update_occurrences!, if: :schedule_changed?
 
   scope :active, -> (active_when = :today) do
     event_ids = case active_when
@@ -64,7 +64,7 @@ class Event < ApplicationRecord
   end
 
   # TODO: Move to worker
-  def update_occurrences
+  def update_occurrences!
     self.occurrences.delete_all
 
     future_occurrences = schedule_rules.occurrences_between(Time.now.beginning_of_day,

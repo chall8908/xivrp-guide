@@ -1,0 +1,4 @@
+production:
+  update_occurances_job:
+    class: 'UpdateOccurrencesJob'
+    cron: '0 0 * * * *'

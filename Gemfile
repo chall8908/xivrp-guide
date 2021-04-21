@@ -66,3 +66,5 @@ gem "mini_magick", "~> 4.11"
 gem "redcarpet", "~> 3.5"
 
 gem "sidekiq", "~> 6.2"
+
+gem "sidekiq-cron", "~> 1.2"
