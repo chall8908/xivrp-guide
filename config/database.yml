@@ -83,4 +83,5 @@ production:
   <<: *default
   database: xivrp_production
   username: xivrp
-  password: <%= ENV['XIVRP_DATABASE_PASSWORD'] %>
+  password: <%= Rails.application.credentials.dig(:database, :password) %>
+  host: <%= Rails.application.credentials.dig(:database, :host) %>
