@@ -1,16 +1,21 @@
-<h2>Forgot your password?</h2>
-
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class='ui segment'>
+  <div style='float: right'>
+    Remembered your password?
+    <%= link_to 'Log In', new_session_path(resource_name), class: 'ui tertiary button' %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
+  <h2>Forgot your password?</h2>
 
-<%= render "devise/shared/links" %>
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'ui form' }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+
+    <div class="field">
+      <%= f.submit "Send me reset password instructions", class: 'ui primary button' %>
+    </div>
+  <% end %>
+</div>
