@@ -10,6 +10,10 @@ select.tomselected[hidden] {
   display: none !important;
 }
 
+main.ui.container {
+  padding-bottom: calc(40px + 1rem);
+}
+
 .floating.system.message {
   position: fixed;
 
@@ -23,4 +27,12 @@ select.tomselected[hidden] {
 
 .ui.text.container .ui.segment {
   font-size: inherit;
+}
+
+.ui.footer.menu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-bottom: 0;
 }
