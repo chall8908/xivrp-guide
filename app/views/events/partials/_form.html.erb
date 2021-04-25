@@ -10,9 +10,96 @@
 
   <div class='required field'>
     <%= f.label :description do %>
-      Description <small>Some markdown supported.</small>
+      Description <small>Some markdown supported.  No HTML.</small>
     <% end %>
     <%= f.text_area :description, maxlength: 240, rows: 5, required: true %>
+
+    <small>Max 240 characters.</small>
+
+    <div class='ui accordion'>
+      <div class='title'>
+        <i class='dropdown icon'></i>
+        Markdown help
+      </div>
+
+      <div class='ui content stackable grid'>
+        <div class='eight wide column'>
+          <table class='ui celled table'>
+            <thead>
+              <tr>
+                <th>Element</th>
+                <th>Syntax</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Headers<br/><small>h3+ only</small></td>
+                <td>### h3</td>
+                <td><%= markdown("### h3") %></td>
+              </tr>
+
+              <tr>
+                <td>Bold</td>
+                <td>**bold text**</td>
+                <td><%= markdown("**bold text**") %></td>
+              </tr>
+
+              <tr>
+                <td>italic</td>
+                <td>*italic text*<br/>_also italic text_</td>
+                <td><%= markdown("_italic text_") %></td>
+              </tr>
+
+              <tr>
+                <td>Ordered List</td>
+                <td>1. First item<br/>2. Second item</td>
+                <td><%= markdown("1. First item\n2. Second item") %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class='eight wide column'>
+          <table class='ui celled table'>
+            <thead>
+              <tr>
+                <th>Element</th>
+                <th>Syntax</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Unordered List</td>
+                <td>* First item<br/>* Second item</td>
+                <td><%= markdown("* First item\n* Second item") %></td>
+              </tr>
+
+              <tr>
+                <td>Link</td>
+                <td>[link text](https://www.example.com)</td>
+                <td><%= markdown('[link text](https://www.example.com)') %></td>
+              </tr>
+
+              <tr>
+                <td>Strikethrough</td>
+                <td>~~Struck out~~</td>
+                <td><%= markdown('~~Struck out~~') %></td>
+              </tr>
+
+              <tr>
+                <td>Superscript</td>
+                <td>^Superscript</td>
+                <td><%= markdown('^Superscript') %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class='fields'>
