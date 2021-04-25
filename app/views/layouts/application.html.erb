@@ -12,7 +12,7 @@
     <%= yield :head %>
   </head>
 
-  <body>
+  <body class='pushable'>
     <%= render partial: 'navbar' %>
 
     <% [:error, :alert, :notice, :success].each do |level| %>

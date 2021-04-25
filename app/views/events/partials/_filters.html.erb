@@ -1,0 +1,33 @@
+<% filters = capture do %>
+  <h4>Filters</h4>
+
+  <%= form_with scope: :filters, method: :get, class: 'ui compact form', data: { controller: 'event-filter' } do |f| %>
+    <div class='field'>
+      <%= f.label :active, 'Open' %>
+      <%= f.select :active, open_options %>
+    </div>
+
+    <div class='field'>
+      <%= f.label :server %>
+      <%= f.select :server, grouped_options_for_select(server_options, filter_params[:server], prompt: 'Any') %>
+    </div>
+
+    <div class='field'>
+      <%= f.submit 'Filter', class: 'ui button' %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class='ui left event filter rail'>
+  <div class='ui left aligned sticky segment'>
+    <%= filters %>
+  </div>
+</div>
+
+<div class='ui vertical event filter sidebar menu left' data-controller='sidebar'>
+  <div class='ui big launch right attached icon button' data-action='click->sidebar#toggle'>
+    <i class='filter icon'></i>
+  </div>
+
+  <%= filters %>
+</div>

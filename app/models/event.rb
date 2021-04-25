@@ -17,30 +17,6 @@ class Event < ApplicationRecord
 
   before_save :update_occurrences!, if: :schedule_changed?
 
-  scope :active, -> (active_when = :today) do
-    event_ids = case active_when
-                when :today
-                  Occurrence
-                    .select(:event_id)
-                    .where(%{ "date" = date_trunc('day', current_timestamp AT TIME ZONE "timezone") })
-                    .distinct
-                when :this_week
-                  Occurrence
-                    .select(:event_id)
-                    .where('"date" BETWEEN ? AND ?', Date.today.beginning_of_week, Date.today.end_of_week)
-                    .distinct
-                when :next_week
-                  Occurrence
-                    .select(:event_id)
-                    .where(%{ "date" BETWEEN date_trunc('day', current_timestamp) AT TIME ZONE "timezone" and date_trunc('day', current_timestamp AT TIME ZONE "timezone" + INTERVAL '1 week') })
-                    .distinct
-                when :at_all
-                  Occurrence.select(:event_id).distinct
-                end
-
-    where(id: event_ids)
-  end
-
   def schedule_rules
     @schedule_rules ||= Time.use_zone(timezone) do
       IceCube::Schedule.from_yaml(self.schedule)

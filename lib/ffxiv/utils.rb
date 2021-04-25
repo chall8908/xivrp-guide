@@ -144,6 +144,8 @@ module Ffxiv
       "Light" => %w{Lich Odin Phoenix Shiva Twintania Zodiark},
     }.freeze
 
+    @@server_names = @@servers.values.flatten.map { _1.downcase }.freeze
+
     class << self
 
       def months
@@ -160,6 +162,10 @@ module Ffxiv
 
       def servers
         @@servers
+      end
+
+      def is_server?(server)
+        @@server_names.include? server.downcase
       end
 
       def data_center(server)

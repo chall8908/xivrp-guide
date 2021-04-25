@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   def index
     authorize! :read, Event
 
-    @events = EventViews::IndexView.new(Event.active)
+    @events = EventViews::IndexView.new(EventQueries.from_filters filter_params)
   end
 
   def show
@@ -97,6 +97,14 @@ class EventsController < ApplicationController
       end
     end
   end
+
+  def filter_params
+    params.fetch(:filters, {}).tap do |fp|
+      # Filter defaults
+      fp[:active] ||= 'today'
+    end
+  end
+  helper_method :filter_params
 
   private
 

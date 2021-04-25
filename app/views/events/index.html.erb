@@ -1,9 +1,13 @@
 <% if @events.any? %>
-  <div class='ui inverted cards grid'>
+  <div class='ui inverted event cards grid'>
+    <%= render partial: 'filters' %>
+
     <%= render @events %>
   </div>
 <% else %>
   <div class='ui placeholder segment'>
+    <%= render partial: 'filters' %>
+
     <h2 class='ui icon header'>
       <i class="calendar outline icon"></i>
       No events found!

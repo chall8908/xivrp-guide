@@ -1,3 +1,39 @@
+.event.cards {
+  /* for rails */
+  position: relative;
+}
+
+.event.filter.rail {
+  display: none;
+}
+
+.event.filter.sidebar {
+  visibility: visible;
+  overflow-y: visible !important;
+
+  transform-style: preserve-3d;
+  transition: transform 0.25s;
+}
+
+.event.filter.sidebar > .launch.button {
+  background: white;
+  position: absolute;
+  top: 50px;
+  left: calc(100% - 5px);
+
+  z-index: -1;
+  transform: translateZ(-1px);
+  transition: left 0.25s;
+}
+
+.event.filter.sidebar > .launch.button:hover {
+  left: 100%;
+}
+
+.event.filter.rail .ui.form input.button {
+  margin: 0 0.25em 0 0;
+}
+
 .event.card {
   font-size: 1.3em !important;
 
@@ -111,6 +147,23 @@
 .event.form .event--days input[type='checkbox'] {
   width: 0px;
   visibility: hidden;
+}
+
+@media (min-width: 1750px) and (max-width: 1800px) {
+  .event.filter.rail {
+    margin-right: 0px;
+    padding-right: 10px;
+  }
+}
+
+@media (min-width: 1750px) {
+  .event.filter.rail {
+    display: block;
+  }
+
+  .event.filter.sidebar {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {

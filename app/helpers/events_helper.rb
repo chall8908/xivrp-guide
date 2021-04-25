@@ -28,4 +28,14 @@ module EventsHelper
               updated_at: Time.now
              )
   end
+
+  def open_options
+    options_for_select({ 'Today' => 'today',
+                        'This Week' => 'this_week',
+                        'Next 7 days' => 'next_week',
+                        'Eventually' => 'at_all'
+                       },
+                       filter_params[:active]
+                      )
+  end
 end
