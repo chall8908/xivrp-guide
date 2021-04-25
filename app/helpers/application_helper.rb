@@ -20,7 +20,8 @@ module ApplicationHelper
 
   def markdown_renderer
     @markdown_renderer ||= Redcarpet::Markdown.new(
-      Redcarpet::Render::HTML.new(no_images: true, no_styles: true, filter_html: true),
+      MarkdownRenderers::SemanticRenderer.new(no_images: true, no_styles: true, filter_html: true,
+                                              link_attributes: { target: '_blank' }),
       no_intra_emphasis: true, strikethrough: true, superscript: true
     )
   end
