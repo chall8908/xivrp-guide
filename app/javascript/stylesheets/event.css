@@ -3,6 +3,13 @@
   position: relative;
 }
 
+.event.cards .event.filter.rail {
+  /* Override top when the rail is under a "cards".  This puts it approximately
+   * in the same position as when it's under a "segment".
+   */
+  top: 1.1375em;
+}
+
 .event.filter.rail {
   display: none;
 }
