@@ -51,6 +51,15 @@
                            data: { registration_target: 'passwordConfirmation' }) %>
     </div>
 
+    <div class='field'>
+      <small>
+        By registering an account, you agree to our
+        <%= link_to 'Terms of Service', terms_of_service_path %>
+        and
+        <%= link_to 'Privacy Policy', privacy_policy_path %>.
+      </small>
+    </div>
+
     <div class="field">
       <%= f.submit "Sign up", class: 'ui primary button' %>
     </div>

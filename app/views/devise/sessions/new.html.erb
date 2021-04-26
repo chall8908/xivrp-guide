@@ -40,7 +40,17 @@
     <div class='center aligned column'>
       <%= link_to user_discord_omniauth_authorize_path, method: :post, class: 'ui huge discord labeled icon button' do %>
         <i class="large discord icon"></i> Sign in with Discord
-        <% end %>
+      <% end %>
+
+      <br/>
+
+      <small>
+        By registering an account, you agree to our
+        <%= link_to 'Terms of Service', terms_of_service_path, target: '_blank' %>
+        and
+        <%= link_to 'Privacy Policy', privacy_policy_path, target: '_blank' %>.
+      </small>
+
     </div>
   </div>
 </div>

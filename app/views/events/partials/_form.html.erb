@@ -210,7 +210,9 @@
 
   <% unless event.banner.present? %>
     <div class='required field'>
-      <%= f.label :banner %>
+      <%= f.label :banner do %>
+        Banner <small>Images <i>must</i> be "Safe for Work".</small>
+      <% end %>
       <%= f.file_field :banner, required: event.banner.nil?, accept: 'image/*', data: { event_form_target: 'file', action: 'change->event-form#updateCardBackground' } %>
     </div>
 
