@@ -19,6 +19,10 @@ export default class extends Controller {
 
     new TomSelect(this.timezoneTarget);
     new TomSelect(this.serverTarget);
+
+    this.previewCard = this.cardsTarget.querySelector('.event.card');
+
+    this.previewCard.addEventListener('click', function(e) { e.preventDefault(); });
   }
 
   updateSlug = () => {
@@ -26,12 +30,11 @@ export default class extends Controller {
   }
 
   updateCardBackground = () => {
-    let card = this.cardsTarget.querySelector('.event.card');
     let file = this.fileTarget.files[0];
     let reader = new FileReader();
 
     reader.onload = (e) => {
-      card.style.cssText = `--bg-image: url(${e.target.result})`
+      this.previewCard.style.cssText = `--bg-image: url(${e.target.result})`
     }
 
     reader.readAsDataURL(file);
