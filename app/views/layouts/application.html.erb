@@ -2,7 +2,16 @@
 <html>
   <head>
     <title>XIVRP Guide</title>
+
+    <%# https://ogp.me - TODO: Update title based on page -%>
+    <meta name="og:site_name" content="XIVRP Guide" />
+    <meta name="og:title" content="XIVRP Guide" />
+    <meta name="og:url" content="<%= request.original_url %>" />
+    <meta name="og:type" content="website" />
+    <meta name="og:description" content="The best place for Final Fantasy 14 roleplay." />
+
     <meta name="viewport" content="width=device-width,initial-scale=1">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
