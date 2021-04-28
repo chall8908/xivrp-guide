@@ -114,7 +114,8 @@ class EventsController < ApplicationController
 
   def create_params
     params.require(:event).permit(:name, :description, :server, :location, :ward,
-                                  :plot, :timezone, :banner, :nearest_aetherite)
+                                  :plot, :timezone, :banner, :nearest_aetherite,
+                                  :carrd_url, :discord_invite, :twitch_url, :dj_url)
   end
 
   def schedule_params

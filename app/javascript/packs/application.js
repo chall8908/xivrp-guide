@@ -11,6 +11,7 @@ Rails.start();
 Turbolinks.start();
 ActiveStorage.start();
 
+import "images";
 import "stylesheets";
 import "controllers";
 import 'watchers';

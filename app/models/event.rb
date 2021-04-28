@@ -15,6 +15,10 @@ class Event < ApplicationRecord
   validates_presence_of(:slug, :name, :description, :server, :location, :timezone,
                         :nearest_aetherite, :schedule)
 
+  validates :carrd_url, format: { with: /\.carrd.co/ }, allow_blank: true
+  validates :discord_invite, format: { with: /\Ahttps:\/\/discord.gg\// }, allow_blank: true
+  validates :twitch_url, format: { with: /\Ahttps:\/\/twitch.tv\// }, allow_blank: true
+
   before_save :update_occurrences!, if: :schedule_changed?
 
   def schedule_rules

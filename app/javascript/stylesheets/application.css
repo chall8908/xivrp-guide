@@ -42,3 +42,8 @@ main.ui.container {
 
   font-weight: bold;
 }
+
+.ui.icon.button > img.carrd.icon {
+  height: 20px;
+  margin: -5px -2px 0 !important;
+}

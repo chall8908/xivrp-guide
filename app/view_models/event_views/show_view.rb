@@ -9,7 +9,8 @@ module EventViews
 
     attr_reader :schedule, :location, :banner_url, :start_time, :end_time
 
-    delegate :<=>, :name, :description, :nearest_aetherite, :banner, :updated_at, to: :@event
+    delegate :<=>, :name, :description, :nearest_aetherite, :banner, :updated_at,
+             :carrd_url, :discord_invite, :twitch_url, :dj_url, to: :@event
 
     def self.build(events)
       events.map { new _1 }

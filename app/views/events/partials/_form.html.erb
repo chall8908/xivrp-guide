@@ -103,6 +103,30 @@
   </div>
 
   <div class='fields'>
+    <div class='eight wide field'>
+      <%= f.label :carrd_url, 'Carrd URL' %>
+      <%= f.url_field :carrd_url, pattern: '^https://.*\.carrd\.co' %>
+    </div>
+    
+    <div class='eight wide field'>
+      <%= f.label :discord_invite %>
+      <%= f.url_field :discord_invite, pattern: '^https://discord.gg/.*' %>
+    </div>
+  </div>
+
+  <div class='fields'>
+    <div class='eight wide field'>
+      <%= f.label :twitch_url, 'Twitch URL' %>
+      <%= f.url_field :twitch_url, pattern: '^https://twitch.tv/.*' %>
+    </div>
+    
+    <div class='eight wide field'>
+      <%= f.label :dj_url, 'DJ URL' %>
+      <%= f.url_field :dj_url %>
+    </div>
+  </div>
+
+  <div class='fields'>
     <div class='required eight wide field'>
       <%= f.label :server %>
       <%= f.select :server, server_options, { include_blank: true }, required: true, data: { event_form_target: 'server' } %>
@@ -208,7 +232,7 @@
     </div>
   </div>
 
-  <div class='required field'>
+  <div class='<%= 'required ' if event.banner.nil? %>field'>
     <%= f.label :banner do %>
       Banner <small>Images <i>must</i> be "Safe for Work".</small>
     <% end %>
