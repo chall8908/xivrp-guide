@@ -60,7 +60,7 @@ class EventsController < ApplicationController
   def update
     @event = Event.find_by(slug: params[:slug])
 
-    authorize :update, @event
+    authorize! :update, @event
 
     @event.assign_attributes(create_params)
     @event.schedule_rules = build_schedule
