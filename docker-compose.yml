@@ -1,30 +1,42 @@
+x-xivrp: &defaults
+  image: xivrp:dev
+  tty: true
+
+  build:
+    context: .
+    dockerfile: Dockerfile.dev
+    args:
+      UID: "${_UID}"
+
+  volumes:
+    - './:/opt/xivrp'
+    - 'node_modules:/opt/xivrp/node_modules'
+
+  env_file: '.env'
+  environment:
+    RAILS_DATABASE_HOST: 'xivrp-db'
+    RAILS_DATABASE_USER: 'xivrp'
+    RAILS_DATABASE_PASS: 'password'
+
 services:
   xivrp:
-    image: xivrp:dev
-
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-      args:
-        UID: "${_UID}"
-
-    volumes:
-      - './:/opt/xivrp'
-      - 'node_modules:/opt/xivrp/node_modules'
-
+    <<: *defaults
     command: ["bin/rails", "server", "--binding=0.0.0.0", "--port=3000"]
 
     ports:
       - '3000:3000'
 
-    env_file: '.env'
-    environment:
-      RAILS_DATABASE_HOST: 'xivrp-db'
-      RAILS_DATABASE_USER: 'xivrp'
-      RAILS_DATABASE_PASS: 'password'
-
     depends_on:
       - 'xivrp-db'
+      - 'xivrp-webpack'
+
+  xivrp-webpack:
+    <<: *defaults
+
+    command: ["bin/webpack-dev-server"]
+
+    ports:
+      - '3035:3035'
   
   xivrp-db:
     image: postgres:13-alpine
