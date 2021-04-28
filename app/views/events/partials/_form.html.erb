@@ -208,20 +208,21 @@
     </div>
   </div>
 
-  <% unless event.banner.present? %>
-    <div class='required field'>
-      <%= f.label :banner do %>
-        Banner <small>Images <i>must</i> be "Safe for Work".</small>
-      <% end %>
-      <%= f.file_field :banner, required: event.banner.nil?, accept: 'image/*', data: { event_form_target: 'file', action: 'change->event-form#updateCardBackground' } %>
-    </div>
+  <div class='required field'>
+    <%= f.label :banner do %>
+      Banner <small>Images <i>must</i> be "Safe for Work".</small>
+    <% end %>
+    <%= f.file_field :banner, required: event.banner.nil?, accept: 'image/*', data: { event_form_target: 'file', action: 'change->event-form#updateCardBackground' } %>
+    <% if event.banner.present? -%>
+      <small>Leave blank to keep current background image (shown below)</small>
+    <% end -%>
+  </div>
 
-    <h3>Background Preview</h3>
+  <h3>Background Preview</h3>
 
-    <div class='ui inverted cards grid' data-event-form-target='cards'>
-      <%= render partial: 'event', locals: { event: EventViews::ShowView.new(dummy_event) } %>
-    </div>
-  <% end %>
+  <div class='ui inverted cards grid' data-event-form-target='cards'>
+    <%= render partial: 'event', locals: { event: EventViews::ShowView.new(event.persisted? ? event : dummy_event) } %>
+  </div>
 
   <%= f.submit(class: 'ui button primary') %>
 <% end %>
