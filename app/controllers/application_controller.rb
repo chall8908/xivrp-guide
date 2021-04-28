@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :set_current_user
+  before_action :set_active_storage_host
 
   # Bit of convenience for partials.  Adds an additional, less efficient resolver
   # That will look for partials in a subfolder named "partials".  This could be
@@ -13,6 +14,10 @@ class ApplicationController < ActionController::Base
 
   def set_current_user
     Current.user = current_user
+  end
+
+  def set_active_storage_host
+    ActiveStorage::Current.host = request.url
   end
 
   def current_ability

@@ -1,5 +1,5 @@
 <div class='sixteen wide column event card event--<%= event.open_class %>'
-     style='--bg-image: url(<%= url_for(event.banner) if event.banner.present? %>)'>
+     style='--bg-image: url(<%= event.banner_url if event.banner_url.present? %>)'>
 
   <%= link_to(event, class: 'content') do %>
     <h3 class='header'><%= event.name %></h3>

@@ -21,7 +21,7 @@ module EventViews
       @start_time = @event.next_or_current_occurrence
       @end_time = @start_time + @event.schedule_rules.duration
 
-      # @banner_url = @event.banner.url
+      @banner_url = @event.banner&.blob&.url
 
       @location = @event.server.humanize
       @location += ', ' + @event.location
