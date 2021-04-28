@@ -23,7 +23,11 @@ class EventsController < ApplicationController
     # @event is loaded by load_resource
 
     # Small dummy schedule to make the form a little nicer
-    @event.schedule = IceCube::Schedule.new(Date.today).to_yaml
+    @event.schedule = IceCube::Schedule.new(Date.today) do |s|
+      # Add infinitely recurring rule that won't be detected by the form
+      # This prevents the end_date from being set automatically
+      s.rrule IceCube::Rule.daily(1)
+    end.to_yaml
   end
 
   def create
