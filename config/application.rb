@@ -36,5 +36,7 @@ module Xivrp
     config.generators.system_tests = nil
 
     config.job_schedule = config_for(:schedule)
+
+    config.discord = ActiveSupport::OrderedOptions.new
   end
 end

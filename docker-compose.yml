@@ -1,0 +1,39 @@
+services:
+  xivrp:
+    image: xivrp:dev
+
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      args:
+        UID: "${_UID}"
+
+    volumes:
+      - './:/opt/xivrp'
+      - 'node_modules:/opt/xivrp/node_modules'
+
+    command: ["bin/rails", "server", "--binding=0.0.0.0", "--port=3000"]
+
+    ports:
+      - '3000:3000'
+
+    env_file: '.env'
+    environment:
+      RAILS_DATABASE_HOST: 'xivrp-db'
+      RAILS_DATABASE_USER: 'xivrp'
+      RAILS_DATABASE_PASS: 'password'
+
+    depends_on:
+      - 'xivrp-db'
+  
+  xivrp-db:
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_USER: xivrp
+      POSTGRES_PASSWORD: password
+    volumes: 
+      - 'dbdata:/var/lib/postgresql/data'
+
+volumes:
+  node_modules:
+  dbdata:

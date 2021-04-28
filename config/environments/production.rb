@@ -118,4 +118,7 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+  
+  config.discord.app_id = credentials.dig(:discord, :app_id)
+  config.discord.app_secret = credentials.dig(:discord, :app_secret)
 end

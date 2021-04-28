@@ -24,7 +24,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'admin@xivrp.guide'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -274,8 +274,8 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
   config.omniauth(:discord,
-                  Rails.application.credentials.discord[:app_id],
-                  Rails.application.credentials.discord[:app_secret],
+                  Rails.configuration.discord.app_id,
+                  Rails.configuration.discord.app_secret,
                   scope: 'email identify')
 
   # ==> Warden configuration

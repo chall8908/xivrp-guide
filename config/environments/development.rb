@@ -69,4 +69,7 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   config.active_job.queue_adapter = :async
+
+  config.discord.app_id = ENV.fetch('DISCORD_APP_ID', credentials.dig(:discord, :app_id))
+  config.discord.app_secret = ENV.fetch('DISCORD_APP_SECRET', credentials.dig(:discord, :app_secret))
 end
