@@ -15,9 +15,9 @@ class User < ApplicationRecord
       .or(where(email: auth.info.email, provider: nil, uid: nil))
       .first_or_initialize
 
-    user.provider ||= auth.provider
-    user.uid ||= auth.uid
-    user.email ||= auth.info.email
+    user.provider = auth.provider unless user.provider.present?
+    user.uid      = auth.uid unless user.uid.present?
+    user.email    = auth.info.email unless user.email.present?
 
     user.password = Devise.friendly_token unless user.encrypted_password?
 
@@ -30,7 +30,7 @@ class User < ApplicationRecord
       user.avatar.attach(io: URI.open(url), filename: filename)
     end
 
-    user.save if user.has_changes_to_save?
+    user.save! if user.has_changes_to_save?
 
     user
   end
