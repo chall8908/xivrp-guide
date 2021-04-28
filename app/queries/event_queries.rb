@@ -23,7 +23,7 @@ module EventQueries
                   when 'next_week'
                     Occurrence
                       .select(:event_id)
-                      .where(%{ "date" BETWEEN date_trunc('day', current_timestamp) AT TIME ZONE "timezone" and date_trunc('day', current_timestamp AT TIME ZONE "timezone" + INTERVAL '1 week') })
+                     .where(%{ "date" BETWEEN date_trunc('day', current_timestamp AT TIME ZONE "timezone") AND date_trunc('day', current_timestamp AT TIME ZONE "timezone" + INTERVAL '1 week') })
                       .distinct
                   when 'at_all'
                     Occurrence.select(:event_id).distinct
