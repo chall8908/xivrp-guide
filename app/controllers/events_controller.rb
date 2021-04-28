@@ -133,6 +133,10 @@ class EventsController < ApplicationController
       # End time is only used for the time part, not the date part
       end_time = Time.zone.parse(schedule[:start_date] + 'T' + schedule[:end_time])
 
+      # If it looks like the end time is before the start time, it's probably 
+      # because the end time is actually the next day (i.e. it crosses midnight)
+      end_time += 1.day if start_time > end_time
+
       rrule = IceCube::Rule.weekly
 
       days = []
@@ -150,7 +154,7 @@ class EventsController < ApplicationController
         rrule.until(Time.zone.parse(schedule[:end_date] + 'T' + schedule[:end_time]))
       end
 
-      IceCube::Schedule.new(start_time, end_time: end_time) do |s|
+      IceCube::Schedule.new(start_time, duration: end_time - start_time) do |s|
         s.add_recurrence_rule(rrule)
       end
     end
