@@ -84,13 +84,15 @@
       </div>
     <% end %>
 
-    <small>
-      Last Updated:
-      <span data-controller='time-conversions'
-            data-time-conversions-target='time'
-            data-time-conversions-time-value='<%= event.updated_at.iso8601 %>'
-            data-time-conversions-time-format-value='DATETIME_SHORT'>
+    <div class='left floated'>
+      <span class='ui small grey text'>
+        Last Updated:
+        <span data-controller='time-conversions'
+              data-time-conversions-target='time'
+              data-time-conversions-time-value='<%= event.updated_at.iso8601 %>'
+              data-time-conversions-time-format-value='DATETIME_SHORT'>
+        </span>
       </span>
-    </small>
+    </div>
   </div>
 </div>
