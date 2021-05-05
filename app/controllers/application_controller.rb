@@ -24,4 +24,14 @@ class ApplicationController < ActionController::Base
     Current.ability || Ability.new
   end
 
+  def page_title
+    controller_name.titleize
+  end
+  helper_method :page_title
+
+  def page_description
+    'The best place for Final Fantasy 14 roleplay.'
+  end
+  helper_method :page_description
+
 end

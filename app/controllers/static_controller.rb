@@ -10,4 +10,8 @@ class StaticController < ApplicationController
   def privacy_policy
     @compact_view = true
   end
+
+  def page_title
+    action_name.titleize
+  end
 end

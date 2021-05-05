@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>XIVRP Guide</title>
+    <title>XIVRP Guide - <%= page_title %></title>
 
-    <%# https://ogp.me - TODO: Update title based on page -%>
     <meta name="og:site_name" content="XIVRP Guide" />
-    <meta name="og:title" content="XIVRP Guide" />
+    <meta name="og:title" content="<%= page_title %>" />
     <meta name="og:url" content="<%= request.original_url %>" />
     <meta name="og:type" content="website" />
-    <meta name="og:description" content="The best place for Final Fantasy 14 roleplay." />
+    <meta name="og:description" content="<%= page_description %>" />
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
 

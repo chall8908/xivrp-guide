@@ -110,6 +110,18 @@ class EventsController < ApplicationController
   end
   helper_method :filter_params
 
+  def page_title
+    return super unless @event.present?
+
+    @event.name
+  end
+
+  def page_description
+    return super unless @event.present?
+
+    @event.description
+  end
+
   private
 
   def create_params
@@ -134,7 +146,7 @@ class EventsController < ApplicationController
       # End time is only used for the time part, not the date part
       end_time = Time.zone.parse(schedule[:start_date] + 'T' + schedule[:end_time])
 
-      # If it looks like the end time is before the start time, it's probably 
+      # If it looks like the end time is before the start time, it's probably
       # because the end time is actually the next day (i.e. it crosses midnight)
       end_time += 1.day if start_time > end_time
 
