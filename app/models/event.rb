@@ -47,7 +47,7 @@ class Event < ApplicationRecord
   def update_occurrences!
     self.occurrences.delete_all
 
-    future_occurrences = schedule_rules.occurrences_between(Time.now.beginning_of_day,
+    future_occurrences = schedule_rules.occurrences_between(Date.yesterday,
                                                             1.month.from_now,
                                                             spans: true)
 
