@@ -34,15 +34,31 @@ module EventViews
       @event
     end
 
+    def open_text
+      case open_class
+      when 'open-soon'
+        return 'Open Soon' if @start_time < 1.hour.from_now
+        'Open Today'
+      else
+        open_class.titleize
+      end
+    end
+
     def open_class
-      now = Time.now
+      @open_class ||= begin
+                        now = Time.now
 
-      # Handle events that don't occur at all today
-      return 'closed' if @start_time > Date.tomorrow
-      return 'open-soon' if @start_time > now
-      return 'closed' if @end_time < now
-
-      return 'open-now'
+                        # Handle events that don't occur at all today
+                        if @start_time > Date.tomorrow
+                          'closed'
+                        elsif @start_time > now
+                          'open-soon'
+                        elsif @end_time < now
+                          'closed'
+                        else
+                          'open-now'
+                        end
+                      end
     end
   end
 end
