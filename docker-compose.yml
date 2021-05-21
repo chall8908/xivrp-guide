@@ -21,7 +21,7 @@ x-xivrp: &defaults
 services:
   xivrp:
     <<: *defaults
-    command: ["bin/rails", "server", "--binding=0.0.0.0", "--port=3000"]
+    command: ["bin/rails", "server", "--binding=0.0.0.0", "--port=3000", "--pid=/tmp/server.pid"]
 
     ports:
       - '3000:3000'
@@ -37,13 +37,13 @@ services:
 
     ports:
       - '3035:3035'
-  
+
   xivrp-db:
     image: postgres:13-alpine
     environment:
       POSTGRES_USER: xivrp
       POSTGRES_PASSWORD: password
-    volumes: 
+    volumes:
       - 'dbdata:/var/lib/postgresql/data'
 
 volumes:
