@@ -1,4 +1,4 @@
-<%= form_with(model: event, class: 'ui event form', data: { controller: 'event-form' }) do |f| %>
+<%= form_with(model: event, class: 'ui event form', data: { controller: 'event-form', action: 'event#validate' }) do |f| %>
 
   <div class='required field'>
     <%= f.label :name do %>
@@ -107,7 +107,7 @@
       <%= f.label :carrd_url, 'Carrd URL' %>
       <%= f.url_field :carrd_url, pattern: '^https://.*\.carrd\.co' %>
     </div>
-    
+
     <div class='eight wide field'>
       <%= f.label :discord_invite %>
       <%= f.url_field :discord_invite, pattern: '^https://discord.gg/.*' %>
@@ -119,7 +119,7 @@
       <%= f.label :twitch_url, 'Twitch URL' %>
       <%= f.url_field :twitch_url, pattern: '^https://twitch.tv/.*' %>
     </div>
-    
+
     <div class='eight wide field'>
       <%= f.label :dj_url, 'DJ URL' %>
       <%= f.url_field :dj_url %>

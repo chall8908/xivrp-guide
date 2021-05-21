@@ -46,5 +46,31 @@ export default class extends Controller {
 
     cl.toggle('active', box.checked);
     cl.toggle('primary', box.checked);
+
+    this.checkDayValidity();
+  }
+
+  checkDayValidity() {
+    const dayButtons = this.element.querySelectorAll('.event--days input[type="checkbox"]');
+
+    // If any day buttons are checked, we're good
+    if ([...dayButtons].some(e => e.checked)) {
+      return true;
+    }
+
+    dayButtons[0].setCustomValidity('Must select at least one day');
+    dayButtons[0].reportValidity();
+
+    return false;
+  }
+
+  validate(e) {
+    this.checkDayValidity()
+
+    if (! this.element.checkDayValidity()) {
+      this.element.reportValidity();
+      e.preventDefault();
+      return false;
+    }
   }
 }

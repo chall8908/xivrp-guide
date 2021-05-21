@@ -152,7 +152,8 @@
 }
 
 .event.form .event--days input[type='checkbox'] {
-  display: none;
+  appearance: none;
+  display: block;
 }
 
 @media (min-width: 1750px) and (max-width: 1800px) {
